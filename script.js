@@ -65,25 +65,41 @@ $(document).ready(function() {
     });
 
   //contact form to excel sheet
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbzUSaaX3XmlE5m9YLOHOBrRuCh2Ohv49N9bs4bew7xPd1qlgpvXtnudDs5Xhp3jF-Fx/exec';
-  const form = document.forms['submitToGoogleSheet']
-  const msg = document.getElementById("msg")
+  // const scriptURL = 'https://script.google.com/macros/s/AKfycbygVaQtLyvxnhXfVAhB_UoBf9Ae1jKbyCTm8AB0L5bZit5yUMLDzE9gFD8o3S4W-lf3/exec';
+  // const form = document.forms['submitToGoogleSheet']
+  // const msg = document.getElementById("msg")
 
-  form.addEventListener('submit', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-          .then(response => {
-              msg.innerHTML = "Message sent successfully"
-              setTimeout(function () {
-                  msg.innerHTML = ""
-              }, 5000)
-              form.reset()
-          })
-          .catch(error => console.error('Error!', error.message))
-  })
+  // form.addEventListener('submit', e => {
+  //     e.preventDefault()
+  //     fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+  //         .then(response => {
+  //             msg.innerHTML = "Message sent successfully"
+  //             setTimeout(function () {
+  //                 msg.innerHTML = ""
+  //             }, 5000)
+  //             form.reset()
+  //         })
+  //         .catch(error => console.error('Error!', error.message))
+  // })
     
-  });
-  
+   });
+  function sendEmail(){
+    Email.send({
+      Host : "smtp.email.com",
+      Username : "apurvadumbare2003@gmail.com",
+      Password : "ApUrVa_2003",
+      To : 'apurvadumbare2003@gmail.com',
+      From : document.getElementById("EMAIL").value,
+      Subject : document.getElementById("SUBJECT").value,
+      Body : "Name: "+ document.getElementById("NAME").value
+             +"<br>Email:" +document.getElementById("EMAIL").value
+      +"Subject: "+document.getElementById("SUBJECT").value
+      + "<br> Message: "+ document.getElementById("MESSAGE").value
+  }).then(
+    message => alert("message sent successfully!!!")
+  );
+  }
+
   function updateActiveSection() {
     var scrollPosition = $(window).scrollTop();
   
